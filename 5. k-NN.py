@@ -4,7 +4,6 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 
-# Load Iris dataset
 iris = load_iris()
 X = iris.data
 y = iris.target
@@ -25,3 +24,10 @@ print(classification_report(y_test, y_pred))
 
 print("Confusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
+
+
+#for dataset provided
+import pandas as pd
+data = pd.read_csv("iris.csv")
+X = data.drop("Species", axis=1)
+y = data["Species"]

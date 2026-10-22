@@ -15,3 +15,7 @@ print(km_pred)
 print("Test Score:", km.score(X))
 print("Confusion Matrix:")
 print(confusion_matrix(y, km_pred))
+
+#for provided dataset
+data = pd.read_csv("data.csv")
+X = data.drop("Result", axis=1)

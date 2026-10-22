@@ -35,3 +35,9 @@ print("Test Score:", rf.score(X_test, y_test))
 print("Confusion Matrix:")
 print(confusion_matrix(y_test, rf_pred))
 
+
+#for dataset provided
+import pandas as pd
+data = pd.read_csv("iris.csv")
+X = data.drop("Species", axis=1)
+y = data["Species"]

@@ -20,3 +20,6 @@ clusters = fcluster(z, t=3, criterion='maxclust')
 print("cluster labels:")
 print(clusters)
 
+#for provided dataset
+data = pd.read_csv("data.csv") 
+x = data.drop("Result", axis=1)

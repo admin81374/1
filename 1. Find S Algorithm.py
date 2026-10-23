@@ -2,30 +2,42 @@ import csv
 
 a = []
 
-with open(r"C:\Users\zoya1\OneDrive\Desktop\pract\Example1.csv", 'r') as f:
-    a = list(csv.reader(f))
+with open(r"Example1.csv", "r", newline="") as file:
+    reader = csv.reader(file)
+    for row in reader:
+        a.append(row)
 
-print("Table:")
+print("\nTable-")
 for row in a:
     print(*row, sep="\t")
 
-print("\nTotal training instances:", len(a))
+data = a #with header: data = a[1:]
 
-n = len(a[0]) - 1
-h = ['0'] * n
+print("\nTotal training instances:", len(data))
 
-print("\nInitial hypothesis:", h)
+num_attribute = len(a[0]) - 1
+hypothesis = ['0'] * num_attribute
 
-#with header: for row in a[1:]:
-for row in a:
-    if row[n] == 'Yes':     # Example: '1', 'positive'
-        for j in range(n):
-            if h[j] == '0' or h[j] == row[j]:
-                h[j] = row[j]
+print("\nInitial hypothesis:", hypothesis)
+
+for i in range(len(data)):
+    attributes = data[i][:-1]
+    target = data[i][-1]
+
+    if target == "Yes":      # Example: '1', 'positive'
+        for j in range(num_attribute):
+            if hypothesis[j] == '0' or hypothesis[j] == attributes[j]:
+                hypothesis[j] = attributes[j]
             else:
-                h[j] = '?'
+                hypothesis[j] = '?'
 
-        print("Hypothesis:", h)
+    print("\nHypothesis for training instance", i + 1, "is:")
+    print(hypothesis)
 
-print("\nMaximally specific hypothesis:", h)
+print("\nFinal maximally specific hypothesis:")
+print(hypothesis)
+
+
+   
+
 

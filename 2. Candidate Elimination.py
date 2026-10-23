@@ -1,32 +1,39 @@
-import pandas as pd
+import csv
+a = []
+with open(r"Example1.csv","r",newline = "")as file:
+    reader = csv.reader(file)
+    for row in reader:
+        a.append(row)
 
-# With header: remove header=None
-data = pd.read_csv(r"C:\Users\zoya1\OneDrive\Desktop\pract\Example1.csv", header=None)
+print("\nTable")
+for row in a :
+    print(*row,sep = "\t")
 
-print("Table:")
-# With header: print(data.to_string(index=False))
-print(data.to_string(index=False, header=False))
+data = a[1:]
+print("\nlenght - ",data)
 
-X = data.iloc[:, :-1].values
-Y = data.iloc[:, -1].values
+attribute = len(a[0])-1
+S = '0' * attribute
+G = '0' * attribute
+print("\nInital hypothesis of S- ", S)
+print("\nInital hypothesis of G - ",G)
 
-n = len(X[0])
-S = ['0'] * n
-G = [['?'] * n]
+for i in range(len(data)):
+    attributes = data[i][:-1]
+    target = data[i][-1]
 
-for i, x in enumerate(X):
+    if target == "yes":      # Example: '1', 'positive'
+         for j in range(attribute):
+             if S[j] == attributes[j]:
+                 S[j] = attributes[j]
+             elif S[j] != attributes[j]:
+                 S[j] = '?'
+    print("\nStep - ",i+1)
+    print("Specific Hypothesis- ", S)
+    print("General hypothesis- ",S)
+print("FInal S - ", S)
+print("final G - ",G)
 
-    if str(Y[i]).lower() == 'yes':  # Example: '1', 'positive'
-        for j in range(n):
-            if S[j] == '0':
-                S[j] = x[j]
-            elif S[j] != x[j]:
-                S[j] = '?'
+ 
 
-    print("\nStep", i + 1)
-    print("Specific_h:", S)
-    print("General_h:", G)
-
-print("\nFinal Specific Hypothesis:", S)
-print("Final General Hypothesis:", G)
 

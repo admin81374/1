@@ -1,39 +1,36 @@
-import csv
-a = []
-with open(r"Example1.csv","r",newline = "")as file:
-    reader = csv.reader(file)
-    for row in reader:
-        a.append(row)
+import pandas as pd
 
-print("\nTable")
-for row in a :
-    print(*row,sep = "\t")
+data = pd.read_csv(r"\Example1.csv")
 
-data = a[1:]
-print("\nlenght - ",data)
+print("\nTable:")
+print(data.to_string(index=False))
 
-attribute = len(a[0])-1
-S = '0' * attribute
-G = '0' * attribute
-print("\nInital hypothesis of S- ", S)
-print("\nInital hypothesis of G - ",G)
+a = data.values.tolist()
 
-for i in range(len(data)):
-    attributes = data[i][:-1]
-    target = data[i][-1]
+print("\nTotal training instances:", len(a))
 
-    if target == "yes":      # Example: '1', 'positive'
-         for j in range(attribute):
-             if S[j] == attributes[j]:
-                 S[j] = attributes[j]
-             elif S[j] != attributes[j]:
-                 S[j] = '?'
-    print("\nStep - ",i+1)
-    print("Specific Hypothesis- ", S)
-    print("General hypothesis- ",S)
-print("FInal S - ", S)
-print("final G - ",G)
+attribute = len(a[0]) - 1
+S = ['0'] * attribute
+G = [['?'] * attribute]
 
- 
+print("\nInitial hypothesis of S:", S)
+print("Initial hypothesis of G:", G)
 
+for i in range(len(a)):
+    attributes = a[i][:-1]
+    target = a[i][-1]
 
+    if str(target).lower() == "yes":
+        for j in range(attribute):
+            if S[j] == '0':
+                S[j] = attributes[j]
+            else:
+                S[j] != attributes[j]
+                S[j] = '?'
+
+    print("\nStep:", i + 1)
+    print("Specific Hypothesis:", S)
+    print("General Hypothesis:", G)
+
+print("\nFinal S:", S)
+print("Final G:", G)

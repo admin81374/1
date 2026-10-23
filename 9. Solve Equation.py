@@ -14,8 +14,8 @@ for p in itertools.permutations(digits, 4):
 
     if abcd * 4 == dcba:
         print("solution found")
-        print(a, b, c, d)
-        print(abcd, "* 4 =", dcba)
+        print(f"A={a},B={b},C={c},D={d}")
+        print(abcd, "*" ,"4","=", dcba)
         break
 else:
     print("no solution found")
@@ -38,7 +38,7 @@ for p in itertools.permutations(range(10), 6):
 
     if ab + cd == ef:
         print("solution found")
-        print("A, B, C, D, E, F =", a, b, c, d, e, f)
+        print(f"A={a},B={b},C={c},D={d},E={e},F={f}")
         print(ab, "+", cd, "=", ef)
         break
 else:

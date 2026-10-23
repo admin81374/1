@@ -1,31 +1,25 @@
-import csv
+import pandas as pd
 
-a = []
+data = pd.read_csv(r"\Example1.csv")
 
-with open(r"Example1.csv", "r", newline="") as file:
-    reader = csv.reader(file)
-    for row in reader:
-        a.append(row)
+print("\nTable:")
+print(data.to_string(index=False))
 
-print("\nTable-")
-for row in a:
-    print(*row, sep="\t")
+a = data.values.tolist()
 
-data = a #with header: data = a[1:]
+print("\nTotal training instances:", len(a))
 
-print("\nTotal training instances:", len(data))
-
-num_attribute = len(a[0]) - 1
-hypothesis = ['0'] * num_attribute
+attribute = len(a[0]) - 1
+hypothesis = ['0'] * attribute
 
 print("\nInitial hypothesis:", hypothesis)
 
-for i in range(len(data)):
-    attributes = data[i][:-1]
-    target = data[i][-1]
+for i in range(len(a)):
+    attributes = a[i][:-1]
+    target = a[i][-1]
 
-    if target == "Yes":      # Example: '1', 'positive'
-        for j in range(num_attribute):
+    if target == "Yes":
+        for j in range(attribute):
             if hypothesis[j] == '0' or hypothesis[j] == attributes[j]:
                 hypothesis[j] = attributes[j]
             else:
@@ -36,8 +30,3 @@ for i in range(len(data)):
 
 print("\nFinal maximally specific hypothesis:")
 print(hypothesis)
-
-
-   
-
-
